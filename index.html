@@ -4,379 +4,291 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>Sélection Collab HCO26</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<title>Sélection Collab</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap">
 <style>
-/* Mise en page : lookbook en grille, barre de sélection fixée en bas, 3 étapes (choisir → infos → envoyé) */
+/* Boutique claire : en-tête fin, grille 3:4 façon e-shop, panier fixe en bas, 3 étapes */
 :root {
-  --bg: #F5F4F7;
-  --surface: #FFFFFF;
-  --ink: #17141C;
-  --muted: #6B6575;
-  --line: #E2DEE8;
-  --accent: #D9246F;
-  --accent-ink: #FFFFFF;
-  --accent-soft: #FBE3EE;
-  --ok: #1F8A5B;
-  --font-display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
-  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bg: #FFFFFF;
+  --soft: #F5F5F6;
+  --ink: #111113;
+  --muted: #74737A;
+  --line: #E7E6EA;
+  --accent: #E2336B;
+  --accent-soft: #FDECF2;
+  --ok: #1E8A5A;
+  --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --sans: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
   color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #131116; --surface: #1D1A22; --ink: #F3F0F6; --muted: #A49DAE; --line: #2F2A36;
-    --accent: #FF4D93; --accent-ink: #1A0A11; --accent-soft: #3A1726; --ok: #4CC98E; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #131116; --surface: #1D1A22; --ink: #F3F0F6; --muted: #A49DAE; --line: #2F2A36;
-  --accent: #FF4D93; --accent-ink: #1A0A11; --accent-soft: #3A1726; --ok: #4CC98E; color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
-body {
-  background: var(--bg); color: var(--ink);
-  font-family: var(--font-body); font-size: 15px; line-height: 1.5;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-bottom: 120px;
-}
-.wrap { max-width: 1080px; margin: 0 auto; }
-header.top { padding-block: 40px 24px; display: grid; gap: 12px; }
-.eyebrow { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(34px, 7vw, 64px); line-height: .98; margin: 0; letter-spacing: -.02em; text-wrap: balance; }
-h1 em { font-style: normal; color: var(--accent); }
-.lead { max-width: 60ch; color: var(--muted); margin: 0; font-size: 16px; }
-.rules { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
-.chip { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 12px; font-size: 13px; }
-.chip b { color: var(--accent); }
+body { background: var(--bg); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.5; padding-bottom: 110px; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 1140px; margin: 0 auto; padding-left: max(20px, env(safe-area-inset-left, 0px)); padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+button, input, select, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.toolbar { display: flex; flex-wrap: wrap; gap: 8px; padding-block: 8px 20px; position: sticky; top: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 5; }
+/* En-tête */
+.topbar { border-bottom: 1px solid var(--line); }
+.topbar .wrap { display: flex; align-items: center; justify-content: space-between; padding-block: 14px; gap: 12px; }
+.logo { font-weight: 700; letter-spacing: .02em; font-size: 15px; }
+.logo span { color: var(--accent); }
+.tag { font-size: 12px; color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+
+.hero { padding-block: 44px 28px; display: grid; gap: 14px; }
+.hello { font-size: 13px; color: var(--muted); font-weight: 600; }
+h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(40px, 7.5vw, 76px); line-height: .95; margin: 0; letter-spacing: -.01em; text-wrap: balance; }
+h1 i { color: var(--accent); }
+.lead { margin: 0; color: var(--muted); max-width: 56ch; font-size: 16px; }
+.steps { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 6px; font-size: 13px; color: var(--muted); }
+.steps b { color: var(--ink); font-weight: 700; margin-right: 4px; }
+
+/* Filtres */
+.filters { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line); }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
-.search { flex: 1 1 220px; min-width: 0; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 12px; padding: 11px 14px; font: inherit; }
-.cat { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 8px 14px; font: inherit; font-size: 14px; cursor: pointer; }
-.cat[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.filters .wrap { display: flex; gap: 8px; padding-block: 12px; align-items: center; overflow-x: auto; scrollbar-width: none; }
+.filters .wrap::-webkit-scrollbar { display: none; }
+.chip { flex: 0 0 auto; border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 7px 14px; font-size: 13px; font-weight: 600; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+.search { flex: 1 0 180px; min-width: 160px; border: 1px solid var(--line); background: var(--soft); border-radius: 999px; padding: 8px 14px; font-size: 14px; margin-left: auto; }
 
-.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 14px; }
-.card { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; cursor: pointer; transition: transform .15s ease, border-color .15s ease; }
-.card:hover { transform: translateY(-2px); }
-.card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-.card.sel { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
-.card.off { opacity: .45; cursor: not-allowed; }
-.ph { aspect-ratio: 3 / 4; width: 100%; max-width: 100%; background: var(--line); display: grid; place-items: center; overflow: hidden; }
-.ph img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.ph .demo { font-family: var(--font-display); font-weight: 700; font-size: 22px; color: var(--muted); text-align: center; padding: 12px; }
-.meta { padding: 10px 12px 12px; display: grid; gap: 4px; min-width: 0; }
-.name { font-size: 14px; font-weight: 500; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.price { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
-.price s { margin-right: 6px; }
-.price .free { color: var(--accent); font-weight: 600; }
-.badge { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%; background: var(--surface); border: 2px solid var(--line); display: grid; place-items: center; font-weight: 700; font-size: 14px; }
-.card.sel .badge { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-.sw { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 2px; }
-.swc { border: 1px solid var(--line); background: var(--bg); color: var(--ink); border-radius: 999px; padding: 2px 8px; font: inherit; font-size: 11px; cursor: pointer; }
-.swc[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--bg); }
-.swc:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
-.see { font-size: 12px; color: var(--muted); text-decoration: underline; text-underline-offset: 2px; width: fit-content; }
-.see:hover { color: var(--accent); }
-.tag-demo { position: absolute; top: 10px; left: 10px; background: var(--ink); color: var(--bg); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; }
-.empty { padding: 40px 0; color: var(--muted); }
+/* Grille */
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 18px; padding-block: 24px; }
+@media (max-width: 900px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px 12px; } }
+.card { position: relative; cursor: pointer; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.card.off { opacity: .4; cursor: not-allowed; }
+.ph { position: relative; aspect-ratio: 3 / 4; max-width: 100%; background: var(--soft); border-radius: 10px; overflow: hidden; }
+.ph img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .35s ease; }
+.card:hover .ph img { transform: scale(1.03); }
+.noimg { position: absolute; inset: 0; display: grid; place-items: center; padding: 14px; text-align: center; font-family: var(--serif); font-size: 26px; line-height: 1.05; color: #A9A8AE; }
+.card.sel .ph { box-shadow: inset 0 0 0 3px var(--accent); }
+.check { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%; background: rgba(255,255,255,.92); border: 1px solid var(--line); display: grid; place-items: center; font-weight: 700; font-size: 13px; }
+.card.sel .check { background: var(--accent); border-color: var(--accent); color: #fff; }
+.meta { display: grid; gap: 4px; min-width: 0; }
+.name { font-weight: 600; font-size: 14px; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cat { font-size: 12px; color: var(--muted); }
+.price { font-size: 13px; font-variant-numeric: tabular-nums; display: flex; gap: 8px; align-items: baseline; }
+.price s { color: var(--muted); }
+.price b { color: var(--accent); font-weight: 700; }
+.sw { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+.swc { border: 1px solid var(--line); background: var(--bg); border-radius: 999px; padding: 2px 9px; font-size: 11.5px; cursor: pointer; }
+.swc[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: #fff; }
+.see { font-size: 12px; color: var(--muted); text-decoration: underline; text-underline-offset: 3px; width: fit-content; }
+.see:hover { color: var(--ink); }
+.empty { grid-column: 1 / -1; padding: 50px 0; color: var(--muted); text-align: center; }
 
-.bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--surface); border-top: 1px solid var(--line);
-  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-top: 12px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
-.bar-in { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; gap: 14px; }
-.thumbs { display: flex; gap: 6px; flex: 1; min-width: 0; overflow-x: auto; }
-.slot { flex: 0 0 auto; width: 40px; height: 52px; border-radius: 8px; border: 1.5px dashed var(--line); overflow: hidden; background: var(--bg); }
-.slot.full { border-style: solid; border-color: var(--accent); }
-.slot img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.count { font-family: var(--font-display); font-weight: 700; font-size: 20px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.btn { border: 0; border-radius: 12px; padding: 13px 20px; font: inherit; font-weight: 600; cursor: pointer; background: var(--accent); color: var(--accent-ink); white-space: nowrap; }
+/* Panier */
+.bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom, 0px); }
+.bar .wrap { display: flex; align-items: center; gap: 14px; padding-block: 12px; }
+.count { font-weight: 700; font-size: 18px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.count small { font-weight: 500; color: var(--muted); font-size: 13px; }
+.slots { display: flex; gap: 6px; flex: 1; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.slot { flex: 0 0 auto; width: 38px; height: 50px; border-radius: 6px; background: var(--soft); border: 1px dashed #D4D3D9; overflow: hidden; display: grid; place-items: center; font-size: 10px; color: var(--muted); }
+.slot.full { border: 1px solid var(--ink); }
+.slot img { width: 100%; height: 100%; object-fit: cover; }
+.btn { border: 0; border-radius: 999px; padding: 13px 22px; font-weight: 700; font-size: 14px; cursor: pointer; background: var(--ink); color: #fff; white-space: nowrap; }
+.btn.pink { background: var(--accent); }
 .btn:disabled { background: var(--line); color: var(--muted); cursor: not-allowed; }
 .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
-.btn:focus-visible, .cat:focus-visible, .search:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 
 /* Étape 2 */
-.step2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 32px; padding-block: 32px; }
-@media (max-width: 780px) { .step2 { grid-template-columns: minmax(0,1fr); } }
-h2 { font-family: var(--font-display); font-weight: 700; font-size: 28px; margin: 0 0 6px; letter-spacing: -.01em; }
-.sub { color: var(--muted); margin: 0 0 18px; }
-.picked { display: grid; gap: 10px; }
-.pick { display: grid; grid-template-columns: 56px minmax(0,1fr); gap: 12px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
-.pick .ph { aspect-ratio: 3/4; border-radius: 8px; }
-.pick .name { -webkit-line-clamp: 2; }
+.step2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; padding-block: 40px; }
+@media (max-width: 820px) { .step2 { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+h2 { font-family: var(--serif); font-weight: 400; font-size: 38px; line-height: 1; margin: 0 0 6px; }
+.sub { color: var(--muted); margin: 0 0 20px; font-size: 14px; }
+.picked { display: grid; gap: 12px; }
+.pick { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.pick .ph { border-radius: 8px; }
+.pick .noimg { font-size: 13px; }
+.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
 form { display: grid; gap: 14px; }
 .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media (max-width: 480px) { .row { grid-template-columns: 1fr; } }
-label { display: grid; gap: 6px; font-size: 13px; font-weight: 600; }
-label span.opt { font-weight: 400; color: var(--muted); }
-input, textarea, select { border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 10px; padding: 11px 12px; font: inherit; font-weight: 400; width: 100%; min-width: 0; }
-.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px; }
-.pick input, .pick select { padding: 8px 10px; font-size: 14px; }
-.pick input[readonly] { color: var(--muted); }
-.note { font-size: 13px; color: var(--muted); background: var(--accent-soft); border-radius: 10px; padding: 10px 12px; }
-.err { color: var(--accent); font-size: 14px; font-weight: 600; }
+label { display: grid; gap: 6px; font-size: 12.5px; font-weight: 700; letter-spacing: .01em; }
+label .opt { font-weight: 500; color: var(--muted); }
+input, select, textarea { border: 1px solid var(--line); background: var(--bg); border-radius: 10px; padding: 12px 13px; font-size: 15px; font-weight: 500; width: 100%; min-width: 0; }
+.pick input, .pick select { padding: 9px 10px; font-size: 13.5px; }
+.pick input[readonly] { background: var(--soft); color: var(--muted); }
+input:focus, select:focus, textarea:focus { border-color: var(--ink); outline: none; }
+.err { color: var(--accent); font-weight: 700; font-size: 14px; margin: 0; }
 .actions { display: flex; gap: 10px; flex-wrap: wrap; }
-
-/* Admin */
-.admin { margin-top: 24px; background: var(--surface); border: 2px dashed var(--accent); border-radius: 16px; padding: 20px; max-width: 640px; }
-.aprev { display: flex; flex-wrap: wrap; gap: 8px; }
-.aprev figure { margin: 0; width: 72px; display: grid; gap: 4px; font-size: 11px; color: var(--muted); text-align: center; }
-.aprev img { width: 72px; height: 96px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); }
+.privacy { font-size: 12px; color: var(--muted); margin: 0; }
 
 /* Étape 3 */
-.done { padding-block: 60px; max-width: 640px; display: grid; gap: 14px; }
-.done h2 { font-size: clamp(30px, 6vw, 48px); }
-.recap { white-space: pre-wrap; font-size: 13px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; max-height: 320px; overflow: auto; }
-.okmark { width: 54px; height: 54px; border-radius: 50%; background: var(--ok); color: #fff; display: grid; place-items: center; font-size: 28px; font-weight: 700; }
-@media (prefers-reduced-motion: reduce) { .card { transition: none; } .card:hover { transform: none; } }
+.done { padding-block: 70px; max-width: 620px; display: grid; gap: 16px; }
+.done h2 { font-size: clamp(44px, 8vw, 68px); }
+.okmark { width: 56px; height: 56px; border-radius: 50%; background: var(--ok); color: #fff; display: grid; place-items: center; font-size: 26px; font-weight: 700; }
+.recap { white-space: pre-wrap; font-size: 13px; background: var(--soft); border-radius: 12px; padding: 14px; max-height: 320px; overflow: auto; margin: 0; font-family: inherit; }
+.note { font-size: 14px; background: var(--accent-soft); border-radius: 10px; padding: 12px 14px; margin: 0; }
+@media (prefers-reduced-motion: reduce) { .ph img { transition: none; } .card:hover .ph img { transform: none; } }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <!-- MODE ADMIN (visible seulement avec ?admin=TONCODE dans l'adresse) -->
-  <section id="admin" class="admin" hidden>
-    <h2>Ajouter un article</h2>
-    <p class="sub">Visible uniquement par toi. L'article apparaît dans la liste quelques secondes après l'ajout.</p>
-    <form id="aform" novalidate>
-      <label for="a-nom">Nom de l'article<input id="a-nom" required></label>
-      <div class="row">
-        <label for="a-prix">Prix <span class="opt">(ex : 24,90)</span><input id="a-prix" inputmode="decimal"></label>
-        <label for="a-cat">Catégorie <span class="opt">(Hauts, Bas…)</span><input id="a-cat" list="a-cats"></label>
-      </div>
-      <datalist id="a-cats"><option>Hauts</option><option>Bas</option><option>Chaussures</option><option>Accessoires</option><option>Robes</option></datalist>
-      <label for="a-lien">Lien HACOO<input id="a-lien" type="url" placeholder="https://"></label>
-      <div class="row">
-        <label for="a-col">Couleurs <span class="opt">(séparées par des virgules)</span><input id="a-col" placeholder="Noir, Gris, Rose"></label>
-        <label for="a-tai">Tailles <span class="opt">(séparées par des virgules)</span><input id="a-tai" placeholder="S, M, L"></label>
-      </div>
-      <label for="a-photos">Photos <span class="opt">(une par couleur, dans le même ordre que les couleurs)</span>
-        <input id="a-photos" type="file" accept="image/*" multiple></label>
-      <div class="aprev" id="a-prev"></div>
-      <p class="err" id="a-err" hidden></p>
-      <p class="note" id="a-ok" hidden></p>
-      <div class="actions"><button type="submit" class="btn" id="a-send">Ajouter l'article</button></div>
-    </form>
-  </section>
+<header class="topbar"><div class="wrap">
+  <div class="logo">HCO<span>26</span></div>
+  <div class="tag">Sélection collab</div>
+</div></header>
 
-  <!-- ÉTAPE 1 : choix -->
-  <section id="step1">
-    <header class="top">
-      <div class="eyebrow" id="hello">Sélection collab</div>
-      <h1>Choisis tes <em id="nbTitle">5</em> articles offerts</h1>
-      <p class="lead">Clique sur les articles qui te plaisent. Tout est offert pour la collab : aucune carte bancaire, juste ton adresse de livraison à la fin.</p>
-      <div class="rules">
-        <span class="chip"><b id="nbChip">5</b> articles</span>
-        <span class="chip">0 € à payer</span>
-        <span class="chip">Taille et couleur à préciser à l'étape suivante</span>
-      </div>
-    </header>
-    <div class="toolbar" id="toolbar">
-      <input class="search" id="q" type="search" placeholder="Rechercher un article…" aria-label="Rechercher un article">
-    </div>
-    <div class="grid" id="grid" aria-live="polite"></div>
-  </section>
-
-  <!-- ÉTAPE 2 : infos -->
-  <section id="step2" hidden>
-    <div class="step2">
-      <div>
-        <h2>Ta sélection</h2>
-        <p class="sub">Indique la taille et la couleur voulues pour chaque article.</p>
-        <div class="picked" id="picked"></div>
-      </div>
-      <div>
-        <h2>Livraison</h2>
-        <p class="sub">Ces infos servent uniquement à t'envoyer le colis.</p>
-        <form id="form" novalidate>
-          <div class="row">
-            <label for="prenom">Prénom<input id="prenom" name="prenom" autocomplete="given-name" required></label>
-            <label for="nom">Nom<input id="nom" name="nom" autocomplete="family-name" required></label>
-          </div>
-          <div class="row">
-            <label for="email">Email<input id="email" name="email" type="email" autocomplete="email" required></label>
-            <label for="tel">Téléphone<input id="tel" name="tel" type="tel" autocomplete="tel" required></label>
-          </div>
-          <label for="adresse">Adresse<input id="adresse" name="adresse" autocomplete="address-line1" required></label>
-          <label for="complement">Complément <span class="opt">(bât., étage, code…)</span><input id="complement" name="complement" autocomplete="address-line2"></label>
-          <div class="row">
-            <label for="cp">Code postal<input id="cp" name="cp" autocomplete="postal-code" inputmode="numeric" required></label>
-            <label for="ville">Ville<input id="ville" name="ville" autocomplete="address-level2" required></label>
-          </div>
-          <label for="pays">Pays<input id="pays" name="pays" autocomplete="country-name" value="France" required></label>
-          <label for="tiktok">Ton TikTok <span class="opt">(@pseudo)</span><input id="tiktok" name="tiktok" placeholder="@"></label>
-          <label for="message">Un message ? <span class="opt">(facultatif)</span><textarea id="message" name="message" rows="3"></textarea></label>
-          <p class="err" id="err" hidden></p>
-          <div class="actions">
-            <button type="button" class="btn ghost" id="back">← Modifier ma sélection</button>
-            <button type="submit" class="btn" id="send">Valider ma commande</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ÉTAPE 3 : confirmation -->
-  <section id="step3" hidden>
-    <div class="done">
-      <div class="okmark" aria-hidden="true">✓</div>
-      <h2 id="doneTitle">C'est envoyé !</h2>
-      <p class="lead" id="doneText">Ta sélection est bien reçue. Je passe la commande et je te tiens au courant pour le suivi du colis.</p>
-      <div id="manual" hidden>
-        <p class="note">Envoie ce récap sur Telegram à <b id="tgName"></b> pour finaliser :</p>
-        <div class="recap" id="recap"></div>
-        <div class="actions" style="margin-top:12px">
-          <button type="button" class="btn" id="copy">Copier le récap</button>
-          <a class="btn ghost" id="tgLink" href="#" target="_blank" rel="noopener">Ouvrir Telegram</a>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- Barre de sélection -->
-<div class="bar" id="bar">
-  <div class="bar-in">
-    <div class="count"><span id="cnt">0</span>/<span id="max">5</span></div>
-    <div class="thumbs" id="thumbs"></div>
-    <button class="btn" id="next" disabled>Continuer</button>
+<!-- ÉTAPE 1 -->
+<section id="step1">
+  <div class="wrap hero">
+    <div class="hello" id="hello">Collab</div>
+    <h1>Choisis tes <i id="nb1">5</i> articles</h1>
+    <p class="lead">Tout est offert. Sélectionne tes coups de cœur, précise la taille et la couleur, puis indique où te les envoyer. Aucun paiement.</p>
+    <div class="steps"><span><b>1</b>Tu choisis</span><span><b>2</b>Tu donnes ton adresse</span><span><b>3</b>On t'envoie le colis</span></div>
   </div>
-</div>
+  <div class="filters"><div class="wrap" id="filters">
+    <input class="search" id="q" type="search" placeholder="Rechercher" aria-label="Rechercher un article">
+  </div></div>
+  <div class="wrap"><div class="grid" id="grid" aria-live="polite"><p class="empty">Chargement des articles…</p></div></div>
+</section>
+
+<!-- ÉTAPE 2 -->
+<section id="step2" hidden>
+  <div class="wrap step2">
+    <div>
+      <h2>Ta sélection</h2>
+      <p class="sub">Choisis la couleur et la taille de chaque article.</p>
+      <div class="picked" id="picked"></div>
+    </div>
+    <div>
+      <h2>Livraison</h2>
+      <p class="sub">Uniquement pour t'envoyer le colis.</p>
+      <form id="form" novalidate>
+        <div class="row">
+          <label for="prenom">Prénom<input id="prenom" name="prenom" autocomplete="given-name" required></label>
+          <label for="nom">Nom<input id="nom" name="nom" autocomplete="family-name" required></label>
+        </div>
+        <div class="row">
+          <label for="email">Email<input id="email" name="email" type="email" autocomplete="email" required></label>
+          <label for="tel">Téléphone<input id="tel" name="tel" type="tel" autocomplete="tel" required></label>
+        </div>
+        <label for="adresse">Adresse<input id="adresse" name="adresse" autocomplete="address-line1" required></label>
+        <label for="complement">Complément <span class="opt">(bâtiment, étage, code)</span><input id="complement" name="complement" autocomplete="address-line2"></label>
+        <div class="row">
+          <label for="cp">Code postal<input id="cp" name="cp" autocomplete="postal-code" required></label>
+          <label for="ville">Ville<input id="ville" name="ville" autocomplete="address-level2" required></label>
+        </div>
+        <label for="pays">Pays<input id="pays" name="pays" autocomplete="country-name" value="France" required></label>
+        <label for="tiktok">Ton TikTok <span class="opt">(@pseudo)</span><input id="tiktok" name="tiktok" placeholder="@"></label>
+        <label for="message">Un message <span class="opt">(facultatif)</span><textarea id="message" name="message" rows="3"></textarea></label>
+        <p class="err" id="err" hidden></p>
+        <div class="actions">
+          <button type="button" class="btn ghost" id="back">← Modifier</button>
+          <button type="submit" class="btn pink" id="send">Valider ma sélection</button>
+        </div>
+        <p class="privacy">Tes infos servent uniquement à l'envoi de ta commande.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ÉTAPE 3 -->
+<section id="step3" hidden>
+  <div class="wrap done">
+    <div class="okmark" aria-hidden="true">✓</div>
+    <h2 id="doneTitle">C'est reçu !</h2>
+    <p class="lead" id="doneText">Merci ! Ta sélection est bien enregistrée. Je passe la commande et je te donne le suivi du colis très vite.</p>
+    <div id="manual" hidden>
+      <p class="note">Dernière étape : envoie ce récap sur Telegram à <b id="tgName"></b>.</p>
+      <pre class="recap" id="recap"></pre>
+      <div class="actions" style="margin-top:12px">
+        <button type="button" class="btn" id="copy">Copier le récap</button>
+        <a class="btn ghost" id="tgLink" href="#" target="_blank" rel="noopener">Ouvrir Telegram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="bar" id="bar"><div class="wrap">
+  <div class="count"><span id="cnt">0</span>/<span id="nb2">5</span> <small>choisis</small></div>
+  <div class="slots" id="slots"></div>
+  <button class="btn" id="next" disabled>Encore 5</button>
+</div></div>
 
 <script>
-/* ============================================================
-   CONFIG — à modifier
-   ============================================================ */
+/* ============ CONFIG ============ */
 const CONFIG = {
-  // URL de l'Apps Script (déploiement "Application Web"). Vide = mode démo.
-  API_URL: "https://script.google.com/macros/s/AKfycbx2c9q8h9zbYeIPQjn-Fc8pI6RxC3ZeUHA__j0q9TxrOqbgP46MCKScSOkZ1UB_Im_v/exec",
-  // Nombre d'articles à choisir
+  // Script Google qui reçoit les commandes (Google Sheet + Telegram)
+  ORDER_URL: "https://script.google.com/macros/s/AKfycbx2c9q8h9zbYeIPQjn-Fc8pI6RxC3ZeUHA__j0q9TxrOqbgP46MCKScSOkZ1UB_Im_v/exec",
   NB_ARTICLES: 5,
-  // Ton pseudo Telegram (sans @) pour le plan B si l'envoi échoue
-  TELEGRAM: "HCO266",
+  TELEGRAM: "HCO266",          // plan B si l'envoi échoue
 };
+/* ================================ */
 
-/* Articles de démonstration (affichés tant que API_URL est vide) */
-const DEMO = [
-  { id: "d1", nom: "Exemple — Hoodie oversize brodé", prix: "24,90", categorie: "Hauts", couleurs: "Noir, Gris, Rose", tailles: "S, M, L, XL" },
-  { id: "d2", nom: "Exemple — Jean baggy délavé", prix: "29,90", categorie: "Bas", tailles: "34, 36, 38, 40" },
-  { id: "d3", nom: "Exemple — Sac porté épaule", prix: "19,90", categorie: "Accessoires", couleurs: "Noir, Marron, Blanc" },
-  { id: "d4", nom: "Exemple — Sneakers rétro", prix: "34,90", categorie: "Chaussures", couleurs: "Blanc/Vert, Blanc/Noir", tailles: "36, 37, 38, 39, 40" },
-  { id: "d5", nom: "Exemple — Top côtelé", prix: "9,90", categorie: "Hauts", couleurs: "Blanc, Noir, Beige, Bleu ciel" },
-  { id: "d6", nom: "Exemple — Jogging cargo", prix: "21,90", categorie: "Bas" },
-  { id: "d7", nom: "Exemple — Lunettes de soleil", prix: "7,90", categorie: "Accessoires" },
-  { id: "d8", nom: "Exemple — Doudoune courte", prix: "39,90", categorie: "Hauts" },
-];
-
-/* ============================================================ */
 const $ = (s) => document.querySelector(s);
 const N = CONFIG.NB_ARTICLES;
-const params = new URLSearchParams(location.search);
-const POUR = (params.get("pour") || "").trim();   // ex : ?pour=Lea
-let produits = [];
-let selection = [];       // ids dans l'ordre de choix
-let filtreCat = "Tout";
-let isDemo = false;
+const POUR = (new URLSearchParams(location.search).get("pour") || "").trim();
+let produits = [], selection = [], filtre = "Tout", erreur = "";
+const vue = {}; // id -> couleur affichée
 
-["#nbTitle", "#nbChip", "#max"].forEach((s) => ($(s).textContent = N));
-if (POUR) $("#hello").textContent = "Sélection collab · pour " + POUR;
+$("#nb1").textContent = N; $("#nb2").textContent = N;
+if (POUR) { $("#hello").textContent = "Sélection pour " + POUR; document.title = "Sélection " + POUR; }
 
-function esc(s) { return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
-// Accepte les liens complets (https://…) et les images du dossier du site (images/hoodie-noir.jpg)
-function safeUrl(u) {
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+function url(u) {
   u = String(u || "").trim(); if (!u) return "";
-  try { const x = new URL(u, location.href); return /^(https?|file):$/.test(x.protocol) ? (/^https?:\/\//i.test(u) ? x.href : u) : ""; } catch { return ""; }
+  if (/^https?:\/\//i.test(u)) return u;
+  if (/^[\w./-]+$/.test(u) && !u.includes("..")) return u; // fichier du site : images/xxx.jpg
+  return "";
 }
-
-const liste = (v) => (Array.isArray(v) ? v : String(v || "").split(/[,;\n]/)).map((x) => String(x).trim()).filter(Boolean);
-// Plusieurs images dans la même case : séparées par une virgule, un espace ou un retour à la ligne avant chaque lien
-const images = (v) => String(v || "").split(/[\s,;]+(?=https?:\/\/|images\/|\.\/)/).map((x) => x.replace(/^[\s,;]+|[\s,;]+$/g, "")).filter(Boolean);
-const normaliser = (p, i) => {
-  const imgs = images(p.image);
-  return { ...p, id: String(p.id || "p" + i), couleurs: liste(p.couleurs), tailles: liste(p.tailles), images: imgs, image: imgs[0] || "" };
+function prix(v) {
+  const n = parseFloat(String(v).replace(",", ".").replace(/[^\d.]/g, ""));
+  return isNaN(n) ? "" : n.toFixed(2).replace(".", ",") + " €";
+}
+const imageDe = (p, i = vue[p.id] ?? 0) => (p.couleurs[i] && p.couleurs[i].image) || p.image || (p.couleurs.find((c) => c.image) || {}).image || "";
+const photo = (p, i) => {
+  const src = url(imageDe(p, i));
+  return src ? `<img src="${esc(src)}" alt="${esc(p.nom)}" loading="lazy">` : `<div class="noimg">${esc(p.nom)}</div>`;
 };
-const vue = {}; // id -> index de la couleur affichée
-const imageDe = (p, i = vue[p.id] ?? 0) => p.images[i] || p.images[0] || "";
-
-let erreurChargement = "";
-
-// Méthode 2 : chargement par balise <script> (contourne les blocages du navigateur)
-function chargerJsonp() {
-  return new Promise((ok, ko) => {
-    const cb = "__produits" + Date.now();
-    const s = document.createElement("script");
-    const fin = (err, data) => { clearTimeout(t); delete window[cb]; s.remove(); err ? ko(err) : ok(data); };
-    const t = setTimeout(() => fin(new Error("délai dépassé")), 15000);
-    window[cb] = (data) => fin(null, data);
-    s.onerror = () => fin(new Error("script inaccessible"));
-    s.src = CONFIG.API_URL + "?action=produits&callback=" + cb + "&t=" + Date.now();
-    document.head.appendChild(s);
-  });
-}
 
 async function charger() {
-  erreurChargement = "";
-  if (!CONFIG.API_URL) { produits = DEMO.map(normaliser); isDemo = true; return; }
-  let data = null, raison = "";
   try {
-    const r = await fetch(CONFIG.API_URL + "?action=produits", { redirect: "follow" });
-    data = await r.json();
-  } catch (e) { raison = e.message; }
-  if (!data) {
-    try { data = await chargerJsonp(); } catch (e) { raison += " / " + e.message; }
-  }
-  if (data) { produits = (data.produits || []).map(normaliser); return; }
-  produits = [];
-  erreurChargement = "Impossible de charger les articles pour le moment. Réessaie dans quelques minutes. (" + raison + ")";
+    const r = await fetch("products.json?t=" + Date.now(), { cache: "no-store" });
+    if (!r.ok) throw new Error("fichier products.json introuvable (" + r.status + ")");
+    const data = await r.json();
+    produits = (data.produits || []).filter((p) => p && p.nom && p.actif !== false).map((p) => ({
+      ...p, id: String(p.id),
+      couleurs: (p.couleurs || []).map((c) => (typeof c === "string" ? { nom: c, image: "" } : c)).filter((c) => c.nom),
+      tailles: (p.tailles || []).map(String).filter(Boolean),
+    }));
+  } catch (e) { erreur = "Impossible de charger les articles. Réessaie dans un instant. (" + e.message + ")"; }
 }
 
-function renderCats() {
+function renderFiltres() {
   const cats = ["Tout", ...new Set(produits.map((p) => p.categorie).filter(Boolean))];
-  $("#toolbar").querySelectorAll(".cat").forEach((b) => b.remove());
+  document.querySelectorAll("#filters .chip").forEach((b) => b.remove());
   if (cats.length < 3) return;
+  const q = $("#q");
   cats.forEach((c) => {
     const b = document.createElement("button");
-    b.className = "cat"; b.type = "button"; b.textContent = c;
-    b.setAttribute("aria-pressed", c === filtreCat);
-    b.onclick = () => { filtreCat = c; renderCats(); renderGrid(); };
-    $("#toolbar").appendChild(b);
+    b.className = "chip"; b.type = "button"; b.textContent = c;
+    b.setAttribute("aria-pressed", String(c === filtre));
+    b.onclick = () => { filtre = c; renderFiltres(); renderGrid(); };
+    q.before(b);
   });
-}
-
-function prixAffiche(v) {
-  const n = parseFloat(String(v).replace(",", ".").replace(/[^\d.]/g, ""));
-  return isNaN(n) ? String(v) : n.toFixed(2).replace(".", ",");
-}
-
-function imgHtml(p, i) {
-  const src = safeUrl(imageDe(p, i));
-  return src ? `<img src="${esc(src)}" alt="" loading="lazy" referrerpolicy="no-referrer">`
-             : `<div class="demo">${esc((p.nom || "").replace(/^Exemple — /, ""))}</div>`;
 }
 
 function renderGrid() {
+  const g = $("#grid");
+  if (erreur) { g.innerHTML = `<p class="empty">${esc(erreur)}</p>`; return; }
+  if (!produits.length) { g.innerHTML = '<p class="empty">Aucun article pour le moment.</p>'; return; }
   const q = $("#q").value.trim().toLowerCase();
-  const list = produits.filter((p) => (filtreCat === "Tout" || p.categorie === filtreCat) && (!q || (p.nom || "").toLowerCase().includes(q)));
-  if (erreurChargement) { $("#grid").innerHTML = `<p class="empty">${esc(erreurChargement)}</p>`; return; }
-  if (!produits.length) { $("#grid").innerHTML = '<p class="empty">Aucun article pour le moment.</p>'; return; }
-  if (!list.length) { $("#grid").innerHTML = '<p class="empty">Aucun article ne correspond.</p>'; return; }
+  const list = produits.filter((p) => (filtre === "Tout" || p.categorie === filtre) && (!q || p.nom.toLowerCase().includes(q)));
+  if (!list.length) { g.innerHTML = '<p class="empty">Aucun article ne correspond à ta recherche.</p>'; return; }
   const plein = selection.length >= N;
-  $("#grid").innerHTML = list.map((p) => {
-    const idx = selection.indexOf(p.id);
-    const sel = idx > -1;
-    const lien = safeUrl(p.lien);
-    return `<article class="card ${sel ? "sel" : ""} ${!sel && plein ? "off" : ""}" data-id="${esc(p.id)}" tabindex="0" role="button" aria-pressed="${sel}">
-      <div class="ph">${imgHtml(p)}</div>
-      ${isDemo ? '<span class="tag-demo">Exemple</span>' : ""}
-      <span class="badge">${sel ? idx + 1 : ""}</span>
+  g.innerHTML = list.map((p) => {
+    const idx = selection.indexOf(p.id), sel = idx > -1, lien = url(p.lien);
+    return `<article class="card ${sel ? "sel" : ""} ${!sel && plein ? "off" : ""}" data-id="${esc(p.id)}" tabindex="0" role="button" aria-pressed="${sel}" aria-label="${esc(p.nom)}">
+      <div class="ph">${photo(p)}<span class="check">${sel ? idx + 1 : ""}</span></div>
       <div class="meta">
-        <div class="name">${esc(p.nom)}</div>
-        ${p.prix ? `<div class="price"><s>${esc(prixAffiche(p.prix))} €</s><span class="free">Offert</span></div>` : ""}
-        ${p.couleurs.length > 1 ? `<div class="sw">${p.couleurs.map((c, ci) =>
-            `<button type="button" class="swc" data-ci="${ci}" aria-pressed="${(vue[p.id] ?? 0) === ci}">${esc(c)}</button>`).join("")}</div>` : ""}
+        <div class="name" title="${esc(p.nom)}">${esc(p.nom)}</div>
+        ${p.categorie ? `<div class="cat">${esc(p.categorie)}</div>` : ""}
+        ${prix(p.prix) ? `<div class="price"><s>${prix(p.prix)}</s><b>Offert</b></div>` : ""}
+        ${p.couleurs.length > 1 ? `<div class="sw">${p.couleurs.map((c, i) => `<button type="button" class="swc" data-ci="${i}" aria-pressed="${(vue[p.id] ?? 0) === i}">${esc(c.nom)}</button>`).join("")}</div>` : ""}
         ${lien ? `<a class="see" href="${esc(lien)}" target="_blank" rel="noopener">Voir le détail</a>` : ""}
       </div>
     </article>`;
@@ -385,205 +297,119 @@ function renderGrid() {
 
 function renderBar() {
   $("#cnt").textContent = selection.length;
-  $("#next").disabled = selection.length !== N;
-  $("#next").textContent = selection.length === N ? "Continuer →" : `Encore ${N - selection.length}`;
+  const ok = selection.length === N;
+  $("#next").disabled = !ok;
+  $("#next").textContent = ok ? "Continuer →" : `Encore ${N - selection.length}`;
   let h = "";
   for (let i = 0; i < N; i++) {
     const p = produits.find((x) => x.id === selection[i]);
-    const src = p && safeUrl(imageDe(p));
-    h += `<div class="slot ${p ? "full" : ""}">${src ? `<img src="${esc(src)}" alt="">` : ""}</div>`;
+    const src = p && url(imageDe(p));
+    h += `<div class="slot ${p ? "full" : ""}">${src ? `<img src="${esc(src)}" alt="">` : p ? "✓" : i + 1}</div>`;
   }
-  $("#thumbs").innerHTML = h;
+  $("#slots").innerHTML = h;
 }
 
 function toggle(id) {
   const i = selection.indexOf(id);
-  if (i > -1) selection.splice(i, 1);
-  else if (selection.length < N) selection.push(id);
+  if (i > -1) selection.splice(i, 1); else if (selection.length < N) selection.push(id);
   renderGrid(); renderBar();
 }
 
 $("#grid").addEventListener("click", (e) => {
   if (e.target.closest("a")) return;
   const sw = e.target.closest(".swc");
-  if (sw) { // aperçu d'une couleur : change la photo sans sélectionner
-    const id = sw.closest(".card").dataset.id;
-    vue[id] = Number(sw.dataset.ci); renderGrid(); renderBar(); return;
-  }
-  const c = e.target.closest(".card"); if (c) toggle(c.dataset.id);
+  if (sw) { vue[sw.closest(".card").dataset.id] = Number(sw.dataset.ci); renderGrid(); renderBar(); return; }
+  const c = e.target.closest(".card"); if (c && !c.classList.contains("off")) toggle(c.dataset.id);
 });
 $("#grid").addEventListener("keydown", (e) => {
-  if (e.key !== "Enter" && e.key !== " ") return;
-  if (e.target.closest(".swc, a")) return;
+  if ((e.key !== "Enter" && e.key !== " ") || e.target.closest(".swc, a")) return;
   const c = e.target.closest(".card"); if (c) { e.preventDefault(); toggle(c.dataset.id); }
 });
 $("#q").addEventListener("input", renderGrid);
 
 function show(n) {
-  $("#step1").hidden = n !== 1; $("#step2").hidden = n !== 2; $("#step3").hidden = n !== 3;
+  ["#step1", "#step2", "#step3"].forEach((s, i) => ($(s).hidden = i + 1 !== n));
   $("#bar").hidden = n !== 1;
   window.scrollTo(0, 0);
 }
 
 $("#next").onclick = () => {
   $("#picked").innerHTML = selection.map((id, i) => {
-    const p = produits.find((x) => x.id === id);
-    const k = esc(id);
-    const choix = (type, label, opts) => {
+    const p = produits.find((x) => x.id === id), k = esc(id);
+    const champ = (type, label, opts, pre) => {
       if (opts.length === 1) return `<input id="${type}-${k}" value="${esc(opts[0])}" readonly aria-label="${label}">`;
-      if (opts.length > 1) return `<select id="${type}-${k}" data-required="${label}" aria-label="${label} pour ${esc(p.nom)}">
-          <option value="">${label} ▾</option>${opts.map((o, oi) =>
-            `<option ${type === "col" && vue[id] === oi ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
-      return `<input id="${type}-${k}" placeholder="${label}${type === "col" ? " (si besoin)" : " (si besoin)"}" aria-label="${label} pour ${esc(p.nom)}">`;
+      if (opts.length > 1) return `<select id="${type}-${k}" data-required="1" aria-label="${label} pour ${esc(p.nom)}"><option value="">${label}</option>${opts.map((o, oi) => `<option ${pre === oi ? "selected" : ""}>${esc(o)}</option>`).join("")}</select>`;
+      return `<input id="${type}-${k}" placeholder="${label} (si besoin)" aria-label="${label} pour ${esc(p.nom)}">`;
     };
-    return `<div class="pick" data-id="${k}"><div class="ph">${imgHtml(p)}</div>
-      <div style="min-width:0"><div class="name">${i + 1}. ${esc(p.nom)}</div>
-      <div class="opts">${choix("col", "Couleur", p.couleurs)}${choix("tai", "Taille", p.tailles)}</div></div></div>`;
+    return `<div class="pick" data-id="${k}"><div class="ph">${photo(p)}</div><div style="min-width:0">
+      <div class="name">${i + 1}. ${esc(p.nom)}</div>
+      <div class="opts">${champ("col", "Couleur", p.couleurs.map((c) => c.nom), p.couleurs.length > 1 ? vue[p.id] : undefined)}${champ("tai", "Taille", p.tailles)}</div>
+    </div></div>`;
   }).join("");
   show(2);
 };
 $("#picked").addEventListener("change", (e) => {
-  const s = e.target; if (!s.matches("select[id^='col-']")) return;
-  const box = s.closest(".pick"); const p = produits.find((x) => x.id === box.dataset.id);
-  if (s.selectedIndex > 0) vue[p.id] = s.selectedIndex - 1;
-  box.querySelector(".ph").innerHTML = imgHtml(p);
+  if (!e.target.matches("select[id^='col-']")) return;
+  const box = e.target.closest(".pick"), p = produits.find((x) => x.id === box.dataset.id);
+  if (e.target.selectedIndex > 0) vue[p.id] = e.target.selectedIndex - 1;
+  box.querySelector(".ph").innerHTML = photo(p);
 });
 $("#back").onclick = () => { renderGrid(); renderBar(); show(1); };
 
-function construire() {
+function commande() {
   const f = Object.fromEntries(new FormData($("#form")).entries());
   const articles = selection.map((id) => {
     const p = produits.find((x) => x.id === id);
-    const val = (t) => ($("#" + t + "-" + CSS.escape(id))?.value || "").trim();
-    const couleur = val("col"), taille = val("tai");
-    const details = [couleur && "Couleur : " + couleur, taille && "Taille : " + taille].filter(Boolean).join(", ");
-    return { id, nom: p.nom, lien: p.lien || "", couleur, taille, details };
+    const v = (t) => (document.getElementById(t + "-" + id)?.value || "").trim();
+    const couleur = v("col"), taille = v("tai");
+    return { id, nom: p.nom, lien: p.lien || "", couleur, taille,
+      details: [couleur && "Couleur : " + couleur, taille && "Taille : " + taille].filter(Boolean).join(", ") };
   });
   return { pour: POUR, ...f, articles, date: new Date().toISOString() };
 }
 
-function recapTexte(c) {
-  return [
-    `🎁 Commande collab${c.pour ? " — " + c.pour : ""}`,
-    "",
-    ...c.articles.map((a, i) => `${i + 1}. ${a.nom}${a.details ? " (" + a.details + ")" : ""}${a.lien ? "\n   " + a.lien : ""}`),
-    "",
-    `${c.prenom} ${c.nom}`,
-    `${c.adresse}${c.complement ? ", " + c.complement : ""}`,
-    `${c.cp} ${c.ville}, ${c.pays}`,
-    `Tél : ${c.tel}`,
-    `Email : ${c.email}`,
-    c.tiktok ? `TikTok : ${c.tiktok}` : "",
-    c.message ? `Message : ${c.message}` : "",
-  ].filter((l) => l !== "").join("\n");
+function recap(c) {
+  return [`Commande collab${c.pour ? " · " + c.pour : ""}`, "",
+    ...c.articles.map((a, i) => `${i + 1}. ${a.nom}${a.details ? " (" + a.details + ")" : ""}${a.lien ? "\n   " + a.lien : ""}`), "",
+    `${c.prenom} ${c.nom}`, `${c.adresse}${c.complement ? ", " + c.complement : ""}`, `${c.cp} ${c.ville}, ${c.pays}`,
+    `Tél : ${c.tel}`, `Email : ${c.email}`, c.tiktok ? `TikTok : ${c.tiktok}` : "", c.message ? `Message : ${c.message}` : "",
+  ].filter((l, i, a) => l !== "" || (a[i - 1] !== "" && i > 0)).join("\n").trim();
 }
 
 $("#form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const err = $("#err"); err.hidden = true;
-  const choixVides = [...document.querySelectorAll("#picked select[data-required]")].filter((s) => !s.value);
-  if (choixVides.length) {
-    err.textContent = `Choisis la couleur ou la taille pour ${choixVides.length === 1 ? "1 article" : choixVides.length + " articles"} de ta sélection.`;
-    err.hidden = false; choixVides[0].focus(); choixVides[0].scrollIntoView({ block: "center" }); return;
-  }
-  const manquants = [...$("#form").querySelectorAll("[required]")].filter((i) => !i.value.trim());
-  if (manquants.length) { err.textContent = "Il manque : " + manquants.map((i) => i.closest("label").firstChild.textContent.trim()).join(", "); err.hidden = false; manquants[0].focus(); return; }
-  if (!/^\S+@\S+\.\S+$/.test($("#email").value)) { err.textContent = "L'adresse email n'a pas l'air valide."; err.hidden = false; $("#email").focus(); return; }
+  const fail = (msg, el) => { err.textContent = msg; err.hidden = false; el && (el.focus(), el.scrollIntoView({ block: "center" })); };
+  const vides = [...document.querySelectorAll("#picked select[data-required]")].filter((s) => !s.value);
+  if (vides.length) return fail(`Choisis la couleur ou la taille pour ${vides.length > 1 ? vides.length + " articles" : "1 article"}.`, vides[0]);
+  const manque = [...$("#form").querySelectorAll("[required]")].filter((i) => !i.value.trim());
+  if (manque.length) return fail("Il manque : " + manque.map((i) => i.closest("label").firstChild.textContent.trim()).join(", ") + ".", manque[0]);
+  if (!/^\S+@\S+\.\S+$/.test($("#email").value)) return fail("L'adresse email n'a pas l'air valide.", $("#email"));
 
-  const cmd = construire();
-  const btn = $("#send"); btn.disabled = true; btn.textContent = "Envoi…";
+  const c = commande(), btn = $("#send");
+  btn.disabled = true; btn.textContent = "Envoi…";
   let ok = false;
-  if (CONFIG.API_URL) {
+  if (CONFIG.ORDER_URL) {
     try {
-      // text/plain évite le blocage CORS côté Google Apps Script
-      await fetch(CONFIG.API_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(cmd) });
+      await fetch(CONFIG.ORDER_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(c) });
       ok = true;
-    } catch (_) { ok = false; }
+    } catch (_) {}
   }
-  btn.disabled = false; btn.textContent = "Valider ma commande";
-
-  const txt = recapTexte(cmd);
-  $("#recap").textContent = txt;
+  btn.disabled = false; btn.textContent = "Valider ma sélection";
+  $("#recap").textContent = recap(c);
   $("#tgName").textContent = "@" + CONFIG.TELEGRAM;
   $("#tgLink").href = "https://t.me/" + encodeURIComponent(CONFIG.TELEGRAM);
   $("#manual").hidden = ok;
-  if (!ok) { $("#doneTitle").textContent = "Presque fini !"; $("#doneText").textContent = "Ta sélection est prête. Il reste une petite étape."; }
+  if (!ok) { $("#doneTitle").textContent = "Presque fini"; $("#doneText").textContent = "Ta sélection est prête, il reste une petite étape."; }
   show(3);
 });
 
 $("#copy").onclick = async () => {
-  const t = $("#recap").textContent;
-  try { await navigator.clipboard.writeText(t); $("#copy").textContent = "Copié ✓"; }
-  catch { const r = document.createRange(); r.selectNodeContents($("#recap")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); $("#copy").textContent = "Sélectionné, fais Copier"; }
+  try { await navigator.clipboard.writeText($("#recap").textContent); $("#copy").textContent = "Copié ✓"; }
+  catch { const r = document.createRange(); r.selectNodeContents($("#recap")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); $("#copy").textContent = "Texte sélectionné, fais Copier"; }
 };
 
-/* ============================================================
-   MODE ADMIN — ouvre le site avec ?admin=TONCODE
-   (le code est vérifié par le script Google, il n'est pas écrit dans ce fichier)
-   ============================================================ */
-const ADMIN = (params.get("admin") || "").trim();
-if (ADMIN) {
-  $("#admin").hidden = false;
-  if (!CONFIG.API_URL) $("#a-err").textContent = "Le site n'est pas encore relié au Google Sheet (API_URL vide) : l'ajout ne fonctionnera qu'une fois relié.", $("#a-err").hidden = false;
-}
-
-// Réduit une photo à 1000 px max et la convertit en JPEG (≈ 100-200 Ko)
-function reduire(file, max = 1000) {
-  return new Promise((ok, ko) => {
-    const url = URL.createObjectURL(file);
-    const img = new Image();
-    img.onload = () => {
-      const r = Math.min(1, max / Math.max(img.width, img.height));
-      const c = document.createElement("canvas");
-      c.width = Math.round(img.width * r); c.height = Math.round(img.height * r);
-      const ctx = c.getContext("2d"); ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, c.width, c.height);
-      ctx.drawImage(img, 0, 0, c.width, c.height);
-      URL.revokeObjectURL(url);
-      ok(c.toDataURL("image/jpeg", 0.82));
-    };
-    img.onerror = () => { URL.revokeObjectURL(url); ko(new Error("Photo illisible : " + file.name)); };
-    img.src = url;
-  });
-}
-
-function apercuPhotos() {
-  const files = [...$("#a-photos").files];
-  const cols = liste($("#a-col").value);
-  $("#a-prev").innerHTML = files.map((f, i) =>
-    `<figure><img src="${URL.createObjectURL(f)}" alt=""><figcaption>${esc(cols[i] || "Photo " + (i + 1))}</figcaption></figure>`).join("");
-}
-$("#a-photos").addEventListener("change", apercuPhotos);
-$("#a-col").addEventListener("input", apercuPhotos);
-
-$("#aform").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const err = $("#a-err"), okBox = $("#a-ok"); err.hidden = true; okBox.hidden = true;
-  const nom = $("#a-nom").value.trim();
-  if (!nom) { err.textContent = "Donne un nom à l'article."; err.hidden = false; $("#a-nom").focus(); return; }
-  if (!CONFIG.API_URL) { err.textContent = "Relie d'abord le site au Google Sheet (API_URL)."; err.hidden = false; return; }
-  const files = [...$("#a-photos").files];
-  const cols = liste($("#a-col").value);
-  if (cols.length > 1 && files.length > 1 && files.length !== cols.length) {
-    err.textContent = `Tu as ${cols.length} couleurs mais ${files.length} photos. Mets une photo par couleur, dans le même ordre.`; err.hidden = false; return;
-  }
-  const btn = $("#a-send"); btn.disabled = true; btn.textContent = "Envoi des photos…";
-  try {
-    const photos = [];
-    for (const [i, f] of files.entries()) photos.push({ nom: (nom + "-" + (cols[i] || i + 1)).replace(/[^\w-]+/g, "-").toLowerCase() + ".jpg", data: (await reduire(f)).split(",")[1] });
-    await fetch(CONFIG.API_URL, {
-      method: "POST", mode: "no-cors", headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ action: "ajouter", code: ADMIN, produit: { nom, prix: $("#a-prix").value.trim(), lien: $("#a-lien").value.trim(), categorie: $("#a-cat").value.trim(), couleurs: $("#a-col").value.trim(), tailles: $("#a-tai").value.trim() }, photos }),
-    });
-    okBox.textContent = `« ${nom} » envoyé. Il apparaît dans la liste d'ici quelques secondes. Si rien ne s'affiche, vérifie ton code admin.`;
-    okBox.hidden = false;
-    $("#aform").reset(); $("#a-prev").innerHTML = "";
-    setTimeout(async () => { await charger(); renderCats(); renderGrid(); renderBar(); }, 5000);
-  } catch (ex) {
-    err.textContent = ex.message || "L'envoi a échoué. Vérifie ta connexion et réessaie."; err.hidden = false;
-  } finally { btn.disabled = false; btn.textContent = "Ajouter l'article"; }
-});
-
-(async () => { await charger(); renderCats(); renderGrid(); renderBar(); })();
+(async () => { await charger(); renderFiltres(); renderGrid(); renderBar(); })();
 </script>
 </body>
 </html>

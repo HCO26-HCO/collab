@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Admin Collab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Outil admin : liste d'articles en lignes, éditeur en panneau, même identité que la boutique */
+:root {
+  --bg: #FFFFFF; --soft: #F5F5F6; --ink: #111113; --muted: #74737A; --line: #E7E6EA;
+  --accent: #E2336B; --accent-soft: #FDECF2; --ok: #1E8A5A; --ok-soft: #E6F4EC;
+  --serif: "Instrument Serif", Georgia, serif; --sans: "Manrope", system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--soft); color: var(--ink); font-family: var(--sans); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 880px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 80px; }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+h1 { font-family: var(--serif); font-weight: 400; font-size: 44px; line-height: 1; margin: 0; }
+h2 { font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1; margin: 0 0 4px; }
+.muted { color: var(--muted); }
+.panel { background: var(--bg); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+.head { display: flex; align-items: end; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+.btn { border: 0; border-radius: 999px; padding: 11px 18px; font-weight: 700; font-size: 14px; cursor: pointer; background: var(--ink); color: #fff; white-space: nowrap; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+.btn.pink { background: var(--accent); }
+.btn.ghost { background: var(--bg); color: var(--ink); border: 1px solid var(--line); }
+.btn.small { padding: 7px 12px; font-size: 13px; }
+.btn.danger { background: var(--bg); color: var(--accent); border: 1px solid var(--accent-soft); }
+.btn:disabled { opacity: .5; cursor: wait; }
+.actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+form { display: grid; gap: 14px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
+label { display: grid; gap: 6px; font-size: 12.5px; font-weight: 700; }
+label .opt { font-weight: 500; color: var(--muted); }
+input, select { border: 1px solid var(--line); background: var(--bg); border-radius: 10px; padding: 11px 12px; font-size: 15px; font-weight: 500; width: 100%; min-width: 0; }
+input:focus { border-color: var(--ink); outline: none; }
+.help { font-size: 13px; color: var(--muted); background: var(--soft); border-radius: 10px; padding: 12px 14px; }
+.help ol { margin: 6px 0 0; padding-left: 18px; }
+.help a { color: var(--ink); }
+
+/* Liste */
+.list { display: grid; gap: 8px; }
+.item { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 14px; align-items: center; background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+.item.hiddenp { opacity: .55; }
+.thumb { width: 56px; aspect-ratio: 3/4; border-radius: 8px; background: var(--soft); overflow: hidden; display: grid; place-items: center; font-size: 10px; color: var(--muted); text-align: center; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.iname { font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.isub { font-size: 12.5px; color: var(--muted); }
+.pill { display: inline-block; font-size: 11px; font-weight: 700; border-radius: 999px; padding: 1px 8px; margin-left: 6px; vertical-align: 2px; }
+.pill.warn { background: var(--accent-soft); color: var(--accent); }
+.pill.off { background: var(--soft); color: var(--muted); }
+@media (max-width: 560px) { .item { grid-template-columns: 48px minmax(0, 1fr); } .item .actions { grid-column: 1 / -1; } }
+
+/* Éditeur photos */
+.variants { display: grid; gap: 10px; }
+.var { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+.var .thumb { width: 64px; }
+.var .fields { display: grid; gap: 6px; min-width: 0; }
+.var input[type=file] { padding: 7px; font-size: 13px; background: var(--soft); }
+.x { border: 0; background: none; font-size: 20px; color: var(--muted); cursor: pointer; padding: 6px 10px; }
+
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(20px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 12px; font-size: 14px; font-weight: 600; max-width: calc(100% - 32px); z-index: 50; box-shadow: 0 8px 30px rgba(0,0,0,.18); }
+.toast.ok { background: var(--ok); }
+.toast.bad { background: var(--accent); }
+.confirm { background: var(--accent-soft); border-radius: 10px; padding: 10px 12px; font-size: 13.5px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; grid-column: 1 / -1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Connexion -->
+  <section id="login" hidden>
+    <div class="head"><div><h1>Admin collab</h1><p class="muted" style="margin:6px 0 0">Ajoute tes articles et leurs photos.</p></div></div>
+    <div class="panel">
+      <form id="lform" novalidate>
+        <div class="row">
+          <label for="owner">Compte GitHub<input id="owner" placeholder="HCO26-HCO" autocomplete="off"></label>
+          <label for="repo">Dépôt<input id="repo" placeholder="collab" autocomplete="off"></label>
+        </div>
+        <label for="token">Clé d'accès GitHub <span class="opt">(token, gardé seulement sur cet appareil)</span>
+          <input id="token" type="password" autocomplete="off" placeholder="github_pat_…"></label>
+        <div class="help">
+          <b>Créer ta clé (une seule fois) :</b>
+          <ol>
+            <li>Ouvre <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a></li>
+            <li>Nom : <i>admin collab</i>. Expiration : 1 an.</li>
+            <li>Repository access : <b>Only select repositories</b> → <b>collab</b>.</li>
+            <li>Permissions → Repository permissions → <b>Contents : Read and write</b>.</li>
+            <li>Generate token, copie la clé et colle-la ici.</li>
+          </ol>
+        </div>
+        <p class="muted" id="lerr" style="color:var(--accent);font-weight:700;margin:0" hidden></p>
+        <div class="actions"><button class="btn pink" type="submit" id="lbtn">Se connecter</button></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Liste -->
+  <section id="main" hidden>
+    <div class="head">
+      <div><h1>Tes articles</h1><p class="muted" id="stats" style="margin:6px 0 0"></p></div>
+      <div class="actions">
+        <a class="btn ghost small" href="./" target="_blank" rel="noopener">Voir le site ↗</a>
+        <button class="btn ghost small" id="logout" type="button">Déconnexion</button>
+        <button class="btn pink" id="add" type="button">+ Ajouter un article</button>
+      </div>
+    </div>
+    <div class="list" id="list"></div>
+  </section>
+
+  <!-- Éditeur -->
+  <section id="editor" hidden>
+    <div class="head"><div><h2 id="etitle">Nouvel article</h2><p class="muted" style="margin:0">Visible sur le site environ 1 minute après l'enregistrement.</p></div></div>
+    <div class="panel">
+      <form id="eform" novalidate>
+        <label for="e-nom">Nom<input id="e-nom" required placeholder="Sac Coach noir"></label>
+        <div class="row">
+          <label for="e-cat">Catégorie<input id="e-cat" list="cats" placeholder="Chaussures"></label>
+          <label for="e-prix">Prix <span class="opt">(facultatif, affiché barré)</span><input id="e-prix" inputmode="decimal" placeholder="49,90"></label>
+        </div>
+        <datalist id="cats"></datalist>
+        <label for="e-lien">Lien de l'article <span class="opt">(ton lien HACOO)</span><input id="e-lien" type="url" placeholder="https://"></label>
+        <label for="e-tailles">Tailles <span class="opt">(séparées par des virgules, vide si pas de taille)</span><input id="e-tailles" placeholder="S, M, L, XL"></label>
+
+        <div style="display:grid;gap:8px">
+          <div style="font-size:12.5px;font-weight:700">Photos et couleurs</div>
+          <div class="help" style="padding:10px 12px">Une ligne par couleur avec sa photo. Si l'article n'a qu'une couleur, laisse juste une ligne sans nom de couleur.</div>
+          <div class="variants" id="variants"></div>
+          <div><button class="btn ghost small" type="button" id="addvar">+ Ajouter une couleur</button></div>
+        </div>
+
+        <label style="display:flex;gap:10px;align-items:center;font-weight:600;font-size:14px"><input id="e-actif" type="checkbox" style="width:auto" checked> Visible sur le site</label>
+        <div class="actions">
+          <button class="btn ghost" type="button" id="cancel">Annuler</button>
+          <button class="btn pink" type="submit" id="save">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const store = {
+  get(k) { try { return localStorage.getItem(k) || ""; } catch { return ""; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+  del(k) { try { localStorage.removeItem(k); } catch {} },
+};
+const slug = (s) => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "article";
+const liste = (v) => String(v || "").split(/[,;\n]/).map((x) => x.trim()).filter(Boolean);
+
+let cfg = { owner: store.get("gh_owner"), repo: store.get("gh_repo"), token: store.get("gh_token"), branch: "main" };
+let produits = [];
+let edition = null;   // produit en cours d'édition (null = nouveau)
+let occupe = false;
+
+// Devine le compte et le dépôt depuis l'adresse du site (compte.github.io/depot/)
+if (!cfg.owner && /\.github\.io$/i.test(location.hostname)) cfg.owner = location.hostname.split(".")[0];
+if (!cfg.repo && /\.github\.io$/i.test(location.hostname)) cfg.repo = location.pathname.split("/").filter(Boolean)[0] || "";
+
+function toast(msg, type = "", ms = 3500) {
+  const t = $("#toast"); t.textContent = msg; t.className = "toast " + type; t.hidden = false;
+  clearTimeout(toast.t); if (ms) toast.t = setTimeout(() => (t.hidden = true), ms);
+}
+
+/* ---------- GitHub ---------- */
+async function gh(path, opts = {}) {
+  const r = await fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}${path}`, {
+    ...opts,
+    headers: { Accept: "application/vnd.github+json", Authorization: "Bearer " + cfg.token, "X-GitHub-Api-Version": "2022-11-28", ...(opts.headers || {}) },
+  });
+  if (!r.ok) {
+    let m = ""; try { m = (await r.json()).message; } catch {}
+    const e = new Error(r.status === 401 ? "Clé d'accès invalide ou expirée." : r.status === 403 ? "La clé n'a pas le droit d'écrire (Contents : Read and write)." : r.status === 404 ? "Dépôt ou fichier introuvable." : (m || "Erreur GitHub " + r.status));
+    e.status = r.status; throw e;
+  }
+  return r.status === 204 ? null : r.json();
+}
+const b64 = {
+  enc(str) { const b = new TextEncoder().encode(str); let s = ""; for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000)); return btoa(s); },
+  dec(s) { const bin = atob(s.replace(/\n/g, "")); return new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0))); },
+};
+async function lireProduits() {
+  try {
+    const f = await gh(`/contents/products.json?ref=${cfg.branch}&t=${Date.now()}`);
+    return { sha: f.sha, data: JSON.parse(b64.dec(f.content)) };
+  } catch (e) { if (e.status === 404) return { sha: null, data: { produits: [] } }; throw e; }
+}
+async function ecrireProduits(modifier, message) {
+  // relit la dernière version juste avant d'écrire, pour ne rien écraser
+  const { sha, data } = await lireProduits();
+  const list = data.produits || [];
+  modifier(list);
+  await gh(`/contents/products.json`, { method: "PUT", body: JSON.stringify({ message, branch: cfg.branch, content: b64.enc(JSON.stringify({ produits: list }, null, 2) + "\n"), ...(sha ? { sha } : {}) }) });
+  produits = list;
+}
+async function envoyerImage(path, base64) {
+  await gh(`/contents/${path}`, { method: "PUT", body: JSON.stringify({ message: "Photo " + path, branch: cfg.branch, content: base64 }) });
+}
+// Pour l'admin : la photo s'affiche tout de suite (avant la mise à jour du site)
+const urlImage = (u) => !u ? "" : /^https?:\/\//i.test(u) ? u : `https://raw.githubusercontent.com/${cfg.owner}/${cfg.repo}/${cfg.branch}/${u.replace(/^\.?\//, "")}`;
+const imageDe = (p) => (p.couleurs || []).find((c) => c.image)?.image || p.image || "";
+
+/* ---------- Photos ---------- */
+function reduire(file, max = 1200) {
+  return new Promise((ok, ko) => {
+    const u = URL.createObjectURL(file), img = new Image();
+    img.onload = () => {
+      const r = Math.min(1, max / Math.max(img.width, img.height));
+      const c = document.createElement("canvas"); c.width = Math.round(img.width * r); c.height = Math.round(img.height * r);
+      const x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height); x.drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(u); ok(c.toDataURL("image/jpeg", 0.85).split(",")[1]);
+    };
+    img.onerror = () => { URL.revokeObjectURL(u); ko(new Error("La photo « " + file.name + " » ne peut pas être lue. Essaie en JPG ou PNG.")); };
+    img.src = u;
+  });
+}
+
+/* ---------- Écrans ---------- */
+function ecran(id) { ["#login", "#main", "#editor"].forEach((s) => ($(s).hidden = s !== id)); window.scrollTo(0, 0); }
+
+function renderListe() {
+  const vis = produits.filter((p) => p.actif !== false).length;
+  const sansPhoto = produits.filter((p) => !imageDe(p)).length;
+  $("#stats").textContent = `${produits.length} articles · ${vis} visibles${sansPhoto ? ` · ${sansPhoto} sans photo` : ""}`;
+  $("#cats").innerHTML = [...new Set(["Chaussures", "Sac à main", "Pull", "Veste", "T-shirt", "Pantalon", "Accessoires", ...produits.map((p) => p.categorie).filter(Boolean)])].map((c) => `<option value="${esc(c)}">`).join("");
+  if (!produits.length) { $("#list").innerHTML = '<div class="panel muted">Aucun article pour l\'instant. Clique sur « Ajouter un article ».</div>'; return; }
+  $("#list").innerHTML = produits.map((p) => {
+    const img = urlImage(imageDe(p));
+    const cols = (p.couleurs || []).map((c) => c.nom).filter(Boolean);
+    return `<div class="item ${p.actif === false ? "hiddenp" : ""}" data-id="${esc(p.id)}">
+      <div class="thumb">${img ? `<img src="${esc(img)}" alt="" loading="lazy">` : "Pas de photo"}</div>
+      <div style="min-width:0">
+        <div class="iname">${esc(p.nom)}${!img ? '<span class="pill warn">sans photo</span>' : ""}${p.actif === false ? '<span class="pill off">masqué</span>' : ""}</div>
+        <div class="isub">${[p.categorie, cols.length ? cols.length + " couleur" + (cols.length > 1 ? "s" : "") : "", (p.tailles || []).length ? p.tailles.join(", ") : ""].filter(Boolean).map(esc).join(" · ")}</div>
+      </div>
+      <div class="actions">
+        <button class="btn ghost small" data-act="vis" type="button">${p.actif === false ? "Afficher" : "Masquer"}</button>
+        <button class="btn small" data-act="edit" type="button">Modifier</button>
+        <button class="btn danger small" data-act="del" type="button" aria-label="Supprimer ${esc(p.nom)}">Supprimer</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+$("#list").addEventListener("click", async (e) => {
+  const b = e.target.closest("button[data-act]"); if (!b || occupe) return;
+  const item = b.closest(".item"), id = item.dataset.id, p = produits.find((x) => x.id === id);
+  const act = b.dataset.act;
+  if (act === "edit") return ouvrirEditeur(p);
+  if (act === "del") {
+    item.querySelector(".confirm")?.remove();
+    item.insertAdjacentHTML("beforeend", `<div class="confirm">Supprimer « ${esc(p.nom)} » ? <button class="btn danger small" data-act="del-ok" type="button">Oui, supprimer</button><button class="btn ghost small" data-act="del-no" type="button">Annuler</button></div>`);
+    return;
+  }
+  if (act === "del-no") return item.querySelector(".confirm").remove();
+  occupe = true; b.disabled = true;
+  try {
+    if (act === "del-ok") {
+      toast("Suppression…", "", 0);
+      await ecrireProduits((l) => { const i = l.findIndex((x) => x.id === id); if (i > -1) l.splice(i, 1); }, "Supprime " + p.nom);
+      toast("Article supprimé", "ok");
+    }
+    if (act === "vis") {
+      toast("Mise à jour…", "", 0);
+      await ecrireProduits((l) => { const x = l.find((x) => x.id === id); if (x) x.actif = x.actif === false; }, (p.actif === false ? "Affiche " : "Masque ") + p.nom);
+      toast(produits.find((x) => x.id === id)?.actif === false ? "Article masqué" : "Article visible", "ok");
+    }
+  } catch (err) { toast(err.message, "bad", 6000); }
+  occupe = false; renderListe();
+});
+
+/* ---------- Éditeur ---------- */
+function ligneVariante(v = {}) {
+  const d = document.createElement("div"); d.className = "var";
+  d.dataset.image = v.image || "";
+  d.innerHTML = `<div class="thumb">${v.image ? `<img src="${esc(urlImage(v.image))}" alt="">` : "Photo"}</div>
+    <div class="fields">
+      <input class="vnom" placeholder="Couleur (ex : Noir)" value="${esc(v.nom || "")}" aria-label="Nom de la couleur">
+      <input class="vfile" type="file" accept="image/*" aria-label="Photo de cette couleur">
+    </div>
+    <button class="x" type="button" aria-label="Retirer cette ligne">×</button>`;
+  d.querySelector(".vfile").addEventListener("change", (e) => {
+    const f = e.target.files[0]; if (!f) return;
+    d.querySelector(".thumb").innerHTML = `<img src="${URL.createObjectURL(f)}" alt="">`;
+  });
+  d.querySelector(".x").onclick = () => { d.remove(); if (!$("#variants").children.length) $("#variants").append(ligneVariante()); };
+  return d;
+}
+
+function ouvrirEditeur(p) {
+  edition = p || null;
+  $("#etitle").textContent = p ? "Modifier l'article" : "Nouvel article";
+  $("#e-nom").value = p?.nom || "";
+  $("#e-cat").value = p?.categorie || "";
+  $("#e-prix").value = p?.prix || "";
+  $("#e-lien").value = p?.lien || "";
+  $("#e-tailles").value = (p?.tailles || []).join(", ");
+  $("#e-actif").checked = p ? p.actif !== false : true;
+  const v = $("#variants"); v.innerHTML = "";
+  const cols = p?.couleurs || [];
+  if (cols.length) cols.forEach((c) => v.append(ligneVariante(c)));
+  else v.append(ligneVariante({ image: p?.image || "" }));
+  ecran("#editor");
+  $("#e-nom").focus();
+}
+$("#add").onclick = () => ouvrirEditeur(null);
+$("#addvar").onclick = () => { const l = ligneVariante(); $("#variants").append(l); l.querySelector(".vnom").focus(); };
+$("#cancel").onclick = () => { ecran("#main"); renderListe(); };
+
+$("#eform").addEventListener("submit", async (e) => {
+  e.preventDefault(); if (occupe) return;
+  const nom = $("#e-nom").value.trim();
+  if (!nom) { toast("Donne un nom à l'article.", "bad"); $("#e-nom").focus(); return; }
+  const lignes = [...document.querySelectorAll("#variants .var")];
+  const nommees = lignes.filter((l) => l.querySelector(".vnom").value.trim());
+  if (nommees.length && nommees.length !== lignes.length) {
+    const l = lignes.find((l) => !l.querySelector(".vnom").value.trim());
+    if (l.querySelector(".vfile").files[0] || l.dataset.image) { toast("Donne un nom de couleur à chaque photo, ou retire la ligne vide.", "bad", 5000); l.querySelector(".vnom").focus(); return; }
+  }
+  const id = edition?.id || (slug(nom) + "-" + Math.random().toString(36).slice(2, 6));
+  occupe = true; $("#save").disabled = true;
+  try {
+    const variantes = [];
+    for (const [i, l] of lignes.entries()) {
+      const vnom = l.querySelector(".vnom").value.trim();
+      const f = l.querySelector(".vfile").files[0];
+      let image = l.dataset.image || "";
+      if (f) {
+        toast(`Envoi de la photo ${i + 1}/${lignes.length}…`, "", 0);
+        const data = await reduire(f);
+        image = `images/${id}-${slug(vnom || "photo")}-${Date.now().toString(36)}.jpg`;
+        await envoyerImage(image, data);
+      }
+      if (vnom || image) variantes.push({ nom: vnom, image });
+    }
+    const couleurs = variantes.filter((v) => v.nom);
+    const produit = {
+      id, nom,
+      prix: $("#e-prix").value.trim(),
+      categorie: $("#e-cat").value.trim(),
+      lien: $("#e-lien").value.trim(),
+      image: (variantes.find((v) => !v.nom) || variantes[0] || {}).image || "",
+      couleurs, tailles: liste($("#e-tailles").value),
+      actif: $("#e-actif").checked,
+    };
+    toast("Enregistrement…", "", 0);
+    await ecrireProduits((l) => { const i = l.findIndex((x) => x.id === id); if (i > -1) l[i] = produit; else l.unshift(produit); }, (edition ? "Modifie " : "Ajoute ") + nom);
+    toast("Enregistré. Visible sur le site d'ici 1 minute environ.", "ok", 5000);
+    ecran("#main"); renderListe();
+  } catch (err) { toast(err.message, "bad", 7000); }
+  occupe = false; $("#save").disabled = false;
+});
+
+/* ---------- Connexion ---------- */
+async function connecter() {
+  const { data } = await lireProduits();
+  produits = data.produits || [];
+  ecran("#main"); renderListe();
+}
+$("#lform").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  cfg.owner = $("#owner").value.trim(); cfg.repo = $("#repo").value.trim(); cfg.token = $("#token").value.trim();
+  const err = $("#lerr"); err.hidden = true;
+  if (!cfg.owner || !cfg.repo || !cfg.token) { err.textContent = "Remplis les trois champs."; err.hidden = false; return; }
+  $("#lbtn").disabled = true;
+  try {
+    const repo = await gh("");
+    cfg.branch = repo.default_branch || "main";
+    if (repo.permissions && !repo.permissions.push) throw new Error("La clé n'a pas le droit d'écrire (Contents : Read and write).");
+    store.set("gh_owner", cfg.owner); store.set("gh_repo", cfg.repo); store.set("gh_token", cfg.token);
+    await connecter();
+  } catch (ex) { err.textContent = ex.message; err.hidden = false; }
+  $("#lbtn").disabled = false;
+});
+$("#logout").onclick = () => { store.del("gh_token"); cfg.token = ""; $("#token").value = ""; ecran("#login"); };
+
+(async () => {
+  $("#owner").value = cfg.owner; $("#repo").value = cfg.repo;
+  if (cfg.owner && cfg.repo && cfg.token) {
+    try { const r = await gh(""); cfg.branch = r.default_branch || "main"; await connecter(); return; }
+    catch (e) { $("#lerr").textContent = e.message; $("#lerr").hidden = false; }
+  }
+  ecran("#login");
+})();
+</script>
+</body>
+</html>
