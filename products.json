@@ -6,8 +6,37 @@
       "prix": "82,50",
       "categorie": "Sac à main",
       "lien": "https://c.onlyaff.app/dstPal",
-      "image": "",
-      "couleurs": [],
+      "image": "images/sac-coach-sac-coach-mvo7238d.jpg",
+      "couleurs": [
+        {
+          "nom": "Sac coach",
+          "image": "images/sac-coach-sac-coach-mvo7238d.jpg"
+        },
+        {
+          "nom": "NOIR",
+          "image": "images/sac-coach-noir-mvo724vo.jpg"
+        },
+        {
+          "nom": "BEIGE",
+          "image": "images/sac-coach-beige-mvo7265f.jpg"
+        },
+        {
+          "nom": "ROSE",
+          "image": "images/sac-coach-rose-mvo727fn.jpg"
+        },
+        {
+          "nom": "BLEU",
+          "image": "images/sac-coach-bleu-mvo728t3.jpg"
+        },
+        {
+          "nom": "MARRON CLAIRE",
+          "image": "images/sac-coach-marron-claire-mvo72a6v.jpg"
+        },
+        {
+          "nom": "MARRON",
+          "image": "images/sac-coach-marron-mvo72bem.jpg"
+        }
+      ],
       "tailles": [],
       "actif": true
     },
